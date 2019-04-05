@@ -1,10 +1,12 @@
 #include"tranfile.h"
 
-int RecvFile(int sockfd)
+int RecvFile(int sockfd,char* fn)
 {
     int ret = 0;
     int size = 0;
     off_t filesize = 0;
+    char uploadFlag;
+    char sizebuf[64]={0};
     char filename[50] = {0};
     char buf[1000] = {0};
     //recv file name
@@ -15,23 +17,51 @@ int RecvFile(int sockfd)
     //recv file size
     ret = RecvCycle(sockfd,(char*)&size,sizeof(int));
     RETURN_MINUSONE(-1,ret,"RecvCycle");
-    ret = RecvCycle(sockfd,(char*)&filesize,size);
+    ret = RecvCycle(sockfd,sizebuf,size);
+    uploadFlag = sizebuf[strlen(sizebuf)-1];
+    sizebuf[strlen(sizebuf)-1] = '\0';
+    filesize = atoi(sizebuf);
+    puts(sizebuf);
+    printf("flag:%c\n",uploadFlag);
     RETURN_MINUSONE(-1,ret,"RecvCycle");
     //recv file data
     printf("filename:%s,filesize:%ld\n",filename,filesize);
-    int fd = open(filename,O_RDWR|O_CREAT,0666);
-    while(1)
+    if(uploadFlag=='1')
     {
-        ret = RecvCycle(sockfd,(char*)&size,sizeof(int));
-        if(size <= 0)
+        int fd = open(fn,O_RDWR|O_APPEND);
+        struct stat ss;
+        fstat(fd,&ss);
+        size = ss.st_size;
+        SendCycle(sockfd,(char*)&size,sizeof(int));
+        while(1)
         {
-            break;
+            ret = RecvCycle(sockfd,(char*)&size,sizeof(int));
+            if(size <= 0)
+            {
+                break;
+            }
+            ret = RecvCycle(sockfd,buf,size);
+            RETURN_MINUSONE(-1,ret,"RecvCycle");
+            write(fd,buf,size);
         }
-        ret = RecvCycle(sockfd,buf,size);
-        RETURN_MINUSONE(-1,ret,"RecvCycle");
-        write(fd,buf,size);
+        printf("Recv Success!\n");
     }
-    printf("Recv Success!\n");
+    else
+    {
+        int fd = open(fn,O_RDWR|O_CREAT,0666);
+        while(1)
+        {
+            ret = RecvCycle(sockfd,(char*)&size,sizeof(int));
+            if(size <= 0)
+            {
+                break;
+            }
+            ret = RecvCycle(sockfd,buf,size);
+            RETURN_MINUSONE(-1,ret,"RecvCycle");
+            write(fd,buf,size);
+        }
+        printf("Recv Success!\n");
+    }
     return 0;
 }
 

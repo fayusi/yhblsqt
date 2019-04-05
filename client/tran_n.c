@@ -1,5 +1,7 @@
 #include"tranfile.h"
 
+extern int uploadNumberOfCharactor;
+
 int SendCycle(int fd,char* sendFile,int sendLen)
 {
     int sendTotal = 0;
@@ -12,6 +14,7 @@ int SendCycle(int fd,char* sendFile,int sendLen)
             return -1;
         }
         sendTotal += ret;
+        uploadNumberOfCharactor +=ret;
     }
     return 0;
 }

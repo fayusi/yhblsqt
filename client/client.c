@@ -1,12 +1,21 @@
 #include"factory.h"
 #include"mmysql.h"
 int sockfd;
+int uploadNumberOfCharactor;
+char uploadNameOfFile[64]={0};
 void sigfunc(int num)
 {
     int cmd = -1;
     send(sockfd,&cmd,sizeof(int),0);
     close(sockfd);
-    printf("exit\n");
+    printf("logout!\n");
+    if(uploadNumberOfCharactor)
+    {
+        int fd = open(uploadNameOfFile,O_WRONLY);
+        sprintf(uploadNameOfFile,"%d",uploadNumberOfCharactor);
+        write(fd,uploadNameOfFile,strlen(uploadNameOfFile));
+        close(fd);
+    }
     exit(1);
 }
 int LoginAccount(int sockfd,char* un)

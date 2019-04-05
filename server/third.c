@@ -34,37 +34,6 @@ int Compute_file_md5(const char *file_path,char *md5_str)
     }
     return 0;
 }
-int Block_check_md5(int fd,int splitsize,char* md5_str)
-{
-    unsigned char data[1024] = {0};
-    unsigned char md5_value[16];
-    int total = 0;
-    int ret = 0;
-    int i;
-    MD5_CTX md5;
-    while (splitsize>total)
-    {
-        ret = read(fd, data,1024);
-        if (-1 == ret)
-        {
-            perror("read");
-            return -1;
-        }
-        total +=ret;
-        MD5Update(&md5,data,ret);
-        if(0 == ret||ret < 1024)
-        {
-            break;
-        }
-    }
-    MD5Final(&md5,md5_value);
-    for(i=0;i<16;i++)
-    {
-        snprintf(md5_str + i*2,2+1,"%02x",md5_value[i]);
-    }
-    md5_str[32]='\0';
-    return 0;
-}
 int SendLs(int sockfd,MYSQL* conn)
 {
     int size = sizeof("success");
@@ -179,7 +148,7 @@ NextDir:
 }
 int SendRM(MYSQL* conn,char* filename,char* pwd,char* ownername)
 {
-    char md5[32]={0};
+    char md5[33]={0};
     MYSQL_RES* res;
     MYSQL_ROW row;
     char fileRealName[64] = {0};
@@ -263,6 +232,7 @@ int SendRM(MYSQL* conn,char* filename,char* pwd,char* ownername)
 }
 int RecvClient(int sockfd,MYSQL* conn,char* pwd,char* filename,char* ownername)
 {
+    char md5_cmp[33] = {0};
     char mfSize[33] = {0};
     char mfRName[64] = {0};
     char fnbuf[64] = {0};
@@ -272,6 +242,7 @@ int RecvClient(int sockfd,MYSQL* conn,char* pwd,char* filename,char* ownername)
     int fnlen=strlen(filename);
     int i,ret,mfRSize;
     char query[1024];
+    char sigbuf[6];
     for(i = 0;i<fnlen-1;i++)
     {
         filename[i]=filename[i+1];
@@ -315,7 +286,7 @@ CheckStart:
     PUT_ERROR(ret,-1,"RecvCycle(2/third.c)");
     memset(query,0,sizeof(query));
     strcpy(query,"select * from file where file_md5='");
-    sprintf(query,"%s%s'",query,MD5_str);
+    sprintf(query,"%s%s' and file_size='%s'",query,MD5_str,mfSize);
     ret = mysql_query(conn,query);
     if(ret)
     {
@@ -333,21 +304,33 @@ CheckStart:
         }
         if(!i)
         {
+            send(sockfd,"giveme",6,0);
+            //传递文件
+            while(1)
+            {
+                ret = RecvFile(sockfd,MD5_str);
+                if(-1 == ret)
+                {
+                    return -2;
+                }
+                Compute_file_md5(MD5_str,md5_cmp);
+                puts(MD5_str);
+                puts(md5_cmp);
+                SendCycle(sockfd,md5_cmp,32);
+                RecvCycle(sockfd,sigbuf,5);
+                if(!strcmp(sigbuf,"okay!"))
+                {
+                    break;
+                }
+            }
             memset(query,0,sizeof(query));
             strcpy(query,
                    "insert into file(file_name,file_belong_directory,file_type,file_size,file_md5,file_owner,file_real_name) values('");
-            sprintf(query,"%s%s','%s','f','%s','%s','%s','%s')",query,fnbuf,pwd,mfSize,MD5_str,ownername,filename);
+            sprintf(query,"%s%s','%s','f','%s','%s','%s','%s')",query,fnbuf,pwd,mfSize,MD5_str,ownername,MD5_str);
             ret = mysql_query(conn,query);
             if(ret)
             {
                 printf("记录到错误日志中去:%s\n",mysql_error(conn));
-            }
-            send(sockfd,"giveme",6,0);
-            //传递文件
-            ret = RecvFile(sockfd);
-            if(-1 == ret)
-            {
-                return -2;
             }
         }
         else
@@ -355,7 +338,7 @@ CheckStart:
             memset(query,0,sizeof(query));
             strcpy(query,
                    "insert into file(file_name,file_belong_directory,file_type,file_size,file_md5,file_owner,file_real_name) values('");
-            sprintf(query,"%s%s','%s','f','%s','%s','%s','%s')",query,fnbuf,pwd,mfSize,MD5_str,ownername,mfRName);
+            sprintf(query,"%s%s','%s','f','%s','%s','%s','%s')",query,fnbuf,pwd,mfSize,MD5_str,ownername,MD5_str);
             ret = mysql_query(conn,query);
             if(ret)
             {

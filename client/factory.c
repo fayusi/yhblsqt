@@ -1,5 +1,6 @@
 #include"factory.h"
 #include"md5.h"
+extern char uploadNameOfFile[64];
 int Compute_file_md5(const char *file_path,char *md5_str)
 {
     int i,fd,ret;
@@ -31,37 +32,6 @@ int Compute_file_md5(const char *file_path,char *md5_str)
     {
         snprintf(md5_str + i*2,2+1,"%02x",md5_value[i]);
     }
-    return 0;
-}
-int Block_check_md5(int fd,int splitsize,char* md5_str)
-{
-    unsigned char data[1024] = {0};
-    unsigned char md5_value[16];
-    int total = 0;
-    int ret = 0;
-    int i;
-    MD5_CTX md5;
-    while (splitsize>total)
-    {
-        ret = read(fd, data,1024);
-        if (-1 == ret)
-        {
-            perror("read");
-            return -1;
-        }
-        total +=ret;
-        MD5Update(&md5, data, ret);
-        if (0 == ret || ret < 1024)
-        {
-            break;
-        }
-    }
-    MD5Final(&md5, md5_value);
-    for(i = 0; i < 16; i++)
-    {
-        snprintf(md5_str + i*2, 2+1, "%02x", md5_value[i]);
-    }
-    md5_str[32] = '\0'; // add end
     return 0;
 }
 int SendGets(int sockfd,char* filename)
@@ -105,6 +75,7 @@ RcvFile:
 }
 int SendPuts(int sockfd,char* filename)
 {
+    char md5_cmp[33] = {0};
     char RFname[64] = {0};
     int fncnt = 0,i;
     char md5_str[33]={0};
@@ -183,7 +154,22 @@ ReEnter:
     recv(sockfd,sendSig,6,0);
     if(!strcmp(sendSig,"giveme"))
     {
-        SendFile(sockfd,filename);
+        while(1)
+        {
+            SendFile(sockfd,filename);
+            RecvCycle(sockfd,md5_cmp,32);
+            if(!strcmp(md5_str,md5_cmp))
+            {
+                strcpy(md5_cmp,"okay!");
+                SendCycle(sockfd,md5_cmp,5);
+                remove(uploadNameOfFile);
+                printf("success!\n");
+                break;
+            }
+            strcpy(md5_cmp,"error");
+            SendCycle(sockfd,md5_cmp,5);
+            printf("file translation error!\n");
+        }
     }
     return 0;
 }

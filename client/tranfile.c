@@ -1,5 +1,5 @@
 #include"tranfile.h"
-
+extern char uploadNameOfFile[64];
 int RecvFile(int sockfd)
 {
     int ret = 0;
@@ -48,34 +48,61 @@ int RecvFile(int sockfd)
 int SendFile(int sockfd,char* filename)
 {
     train t;
+    char uploadFlag[2]="0";
+    int uploadsize=0;
+    char upcharnum[64]={0};
     int ret;
     off_t realsize = 0,filesize;
     int bufsize = 0;
     memset(&t,0,sizeof(train));
+    memset(uploadNameOfFile,0,sizeof(uploadNameOfFile));
+    strcpy(uploadNameOfFile,filename);
     strcpy(t.buf,filename);
     t.dataLen = strlen(filename);
     ret = SendCycle(sockfd,(char *)&t,4+t.dataLen);
     RETURN_MINUSONE(-1,ret,"SendCycle");
+
     int fd = open(filename,O_RDONLY);
+    //get upload date;
+    sprintf(uploadNameOfFile,"%s_uploadLog",uploadNameOfFile);
+    int fd2 = open(uploadNameOfFile,O_RDONLY|O_CREAT,0600);
+    ret = read(fd2,upcharnum,sizeof(upcharnum));
+    if(ret)
+    {
+        strcpy(uploadFlag,"1");
+    }
+    close(fd2);
     struct stat buf;
     ret = fstat(fd,&buf);
-    filesize = buf.st_size;
     RETURN_MINUSONE(-1,ret,"fstat");
-    t.dataLen = sizeof(buf.st_size);
-    memcpy(t.buf,&buf.st_size,sizeof(buf.st_size));
+    filesize = buf.st_size;
+    sprintf(t.buf,"%ld%s",buf.st_size,uploadFlag);
+    t.dataLen = sizeof(t.buf);
     ret = SendCycle(sockfd,(char *)&t,4+t.dataLen);
     RETURN_MINUSONE(-1,ret,"SendCycle");
-    while((t.dataLen = read(fd,t.buf,sizeof(t.buf)))>0)
+    if(!strcmp(uploadFlag,"1"))
     {
-        ret = SendCycle(sockfd,(char*)&t,4+t.dataLen);
-        RETURN_MINUSONE(-1,ret,"SendCycle");
-        realsize +=t.dataLen;
-        if(((realsize*1.0/filesize)*100-bufsize)>1)
+        RecvCycle(sockfd,(char*)&uploadsize,sizeof(int));
+    }
+    if(filesize > 104857600)
+    {
+        lseek(fd,uploadsize,SEEK_SET);
+        printf("upsize:%d\n",uploadsize);
+        while((t.dataLen = read(fd,t.buf,sizeof(t.buf)))>0)
         {
-            bufsize++;
-            printf("%5.2f%s\r",(realsize*1.0/filesize)*100,"%");
-            fflush(stdout);
+            ret = SendCycle(sockfd,(char*)&t,4+t.dataLen);
+            RETURN_MINUSONE(-1,ret,"SendCycle");
+            realsize +=t.dataLen;
+            if(((realsize*1.0/filesize)*100-bufsize)>1)
+            {
+                bufsize++;
+                printf("%5.2f%s\r",(realsize*1.0/filesize)*100,"%");
+                fflush(stdout);
+            }
         }
+    }
+    else
+    {
     }
     printf("100.00%s\n","%");
     ret = SendCycle(sockfd,(char *)&t,4);

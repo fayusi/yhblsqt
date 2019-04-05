@@ -7,6 +7,9 @@ typedef struct
     char buf[1000];
 }train;
 
+extern int uploadNumberOfCharactor;
+extern char uploadNameOfFile[64];
+
 int SendCycle(int,char*,int);
 int RecvCycle(int,char*,int);
 int RecvFile(int);

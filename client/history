@@ -1,0 +1,1000 @@
+ 1004  vim login_check.c
+ 1005  vim login_check.h
+ 1006  gcc login_check.c -I /usr/include/mysql/ -lmysqlclient
+ 1007  sudo ./a.out 
+ 1008  vim login_check.c
+ 1009  gcc login_check.c -I /usr/include/mysql/ -lmysqlclient
+ 1010  ./a.out 
+ 1011  vim login_check.c
+ 1012  gcc login_check.c -I /usr/include/mysql/ -lmysqlclient
+ 1013  ./a.out 
+ 1014  vim login_check.c
+ 1015  gcc login_check.c -I /usr/include/mysql/ -lmysqlclient
+ 1016  ./a.out 
+ 1017  vim login_check.c
+ 1018  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthrad
+ 1019  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread
+ 1020  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1021  rm a.out 
+ 1022  ./server 
+ 1023  ./server 127.1.1.1 8888 5 10
+ 1024  vim login_check.c
+ 1025  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1026  ./server 127.1.1.1 8888 5 10
+ 1027  vim login_check.c
+ 1028  vim server.c 
+ 1029  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1030  ./server 127.1.1.1 8888 5 10
+ 1031  vim login_check.c
+ 1032  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1033  ./server 127.1.1.1 8888 5 10
+ 1034  vim login_check.c
+ 1035  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1036  ./server 127.1.1.1 8888 5 10
+ 1037  vim login_check.c
+ 1038  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1039  ./server 127.1.1.1 8888 5 10
+ 1040  vim login_check.c
+ 1041  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1042  ./server 127.1.1.1 8888 5 10
+ 1043  vim login_check.c
+ 1044  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1045  vim login_check.c
+ 1046  ./server 127.1.1.1 8888 5 10
+ 1047  vim login_check.c
+ 1048  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1049  ./server 127.1.1.1 8888 5 10
+ 1050  vim login_check.c
+ 1051  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1052  ./server 127.1.1.1 8888 5 10
+ 1053  vim login_check.c
+ 1054  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1055  ./server 127.1.1.1 8888 5 10
+ 1056  vim login_check.c
+ 1057  mysql
+ 1058  mysql -u root -p
+ 1059  cd wangdao/project/netpan/2/server/src/
+ 1060  vim factory.h
+ 1061  vim work_que.h
+ 1062  vim factory.c
+ 1063  cd ..
+ 1064  cd..
+ 1065  cd ..
+ 1066  cd clent/
+ 1067  cp -r ../../1/client/src/ .
+ 1068  cd src/
+ 1069  ll
+ 1070  vim client.c 
+ 1071  make
+ 1072  ./BigTrainClient 127.1.1.1 8888
+ 1073  vim client.c 
+ 1074  make
+ 1075  ./BigTrainClient 127.1.1.1 8888
+ 1076  ./BigTrainClient 127.1.1.1 8888
+ 1077  mysql -u root -p
+ 1078  ./BigTrainClient 127.1.1.1 8888
+ 1079  vim client.c 
+ 1080  ./BigTrainClient 127.1.1.1 8888
+ 1081  mysql
+ 1082  mysql -u root -p
+ 1083  ./BigTrainClient 127.1.1.1 8888
+ 1084  mysql -u root -p
+ 1085  ./BigTrainClient 127.1.1.1 8888
+ 1086  mysql -u root -p
+ 1087  ./BigTrainClient 127.1.1.1 8888
+ 1088  man mysql_query
+ 1089  man pthread_create
+ 1090  cd wangdao/project/netpan/2/server/
+ 1091  cd src/
+ 1092  buildNewDD 
+ 1093  vim login_check.c
+ 1094  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread
+ 1095  rm a.out 
+ 1096  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1097  ./server 127.1.1.1 8888 5 10
+ 1098  vim login_check.c
+ 1099  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1100  ./server 127.1.1.1 8888 5 10
+ 1101  vim login_check.c
+ 1102  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1103  ./server 127.1.1.1 8888 5 10
+ 1104  vim login_check.c
+ 1105  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1106  ./server 127.1.1.1 8888 5 10
+ 1107  vim login_check.c
+ 1108  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1109  ./server 127.1.1.1 8888 5 10
+ 1110  vim login_check.c
+ 1111  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1112  ./server 127.1.1.1 8888 5 10
+ 1113  vim login_check.c
+ 1114  ./server 127.1.1.1 8888 5 10
+ 1115  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1116  ./server 127.1.1.1 8888 5 10
+ 1117  vim login_check.c
+ 1118  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1119  ./server 127.1.1.1 8888 5 10
+ 1120  vim login_check.c
+ 1121  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1122  ./server 127.1.1.1 8888 5 10
+ 1123  vim login_check.c
+ 1124  vim server.c 
+ 1125  vim login_check.c
+ 1126  vim server.c 
+ 1127  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1128  ./server 127.1.1.1 8888 5 10
+ 1129  vim server.c 
+ 1130  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1131  ./server 127.1.1.1 8888 5 10
+ 1132  vim server.c 
+ 1133  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1134  ./server 127.1.1.1 8888 5 10
+ 1135  vim server.c 
+ 1136  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1137  ./server 127.1.1.1 8888 5 10
+ 1138  vim login_check.c
+ 1139  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1140  ./server 127.1.1.1 8888 5 10
+ 1141  vim login_check.c
+ 1142  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1143  ./server 127.1.1.1 8888 5 10
+ 1144  vim login_check.c
+ 1145  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1146  ./server 127.1.1.1 8888 5 10
+ 1147  vim login_check.c
+ 1148  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1149  ./server 127.1.1.1 8888 5 10
+ 1150  vim login_check.c
+ 1151  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1152  ./server 127.1.1.1 8888 5 10
+ 1153  vim login_check.c
+ 1154  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1155  ./server 127.1.1.1 8888 5 10
+ 1156  vim login_check.c
+ 1157  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1158  ./server 127.1.1.1 8888 5 10
+ 1159  vim login_check.c
+ 1160  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1161  ./server 127.1.1.1 8888 5 10
+ 1162  vim login_check.c
+ 1163  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1164  ./server 127.1.1.1 8888 5 10
+ 1165  vim login_check.c
+ 1166  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1167  ./server 127.1.1.1 8888 5 10
+ 1168  vim login_check.c
+ 1169  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1170  vim login_check.c
+ 1171  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1172  ./server 127.1.1.1 8888 5 10
+ 1173  vim login_check.c
+ 1174  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1175  vim login_check.c
+ 1176  ./server 127.1.1.1 8888 5 10
+ 1177  vim login_check.c
+ 1178  ./server 127.1.1.1 8888 5 10
+ 1179  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1180  ./server 127.1.1.1 8888 5 10
+ 1181  vim login_check.c
+ 1182  ./server 127.1.1.1 8888 5 10
+ 1183  vim login_check.c
+ 1184  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1185  ./server 127.1.1.1 8888 5 10
+ 1186  vim login_check.c
+ 1187  gcc *.c -I /usr/include/mysql/ -lmysqlclient -pthread -o server
+ 1188  ./server 127.1.1.1 8888 5 10
+ 1189  vim login_check.c
+ 1190  cd wangdao/20190401/
+ 1191  man crypt
+ 1192  vim client.c 
+ 1193  vim crypt.c 
+ 1194  vim test.c
+ 1195  rm test.c
+ 1196  vim crypt.c 
+ 1197  gcc crypt.c 
+ 1198  gcc crypt.c -lmysql -lcrypt
+ 1199  vim crypt.c 
+ 1200  gcc crypt.c -lmysql -lcrypt
+ 1201  gcc crypt.c -lcrypt
+ 1202  vim crypt.c 
+ 1203  gcc crypt.c -lcrypt
+ 1204  ./a.out 
+ 1205  ./a.out xjl 123
+ 1206  vim crypt.c 
+ 1207  cd wangdao/20190401/
+ 1208  vim crypt.c
+ 1209  gcc crypt.c 
+ 1210  vim crypt.c
+ 1211  gcc crypt.c 
+ 1212  gcc crypt.c -lcrypt
+ 1213  ./a.out 
+ 1214  vim crypt.c
+ 1215  gcc crypt.c -lcrypt
+ 1216  ./a.out 
+ 1217  gcc crypt.c -lcrypt
+ 1218  ./a.out 
+ 1219  gcc crypt.c -lcrypt
+ 1220  ./a.out 
+ 1221  gcc crypt.c -lcrypt
+ 1222  ./a.out 
+ 1223  gcc crypt.c -lcrypt
+ 1224  ./a.out 
+ 1225  gcc crypt.c -lcrypt
+ 1226  ./a.out 
+ 1227  gcc crypt.c -lcrypt
+ 1228  ./a.out 
+ 1229  gcc crypt.c -lcrypt
+ 1230  ./a.out 
+ 1231  gcc crypt.c -lcrypt
+ 1232  .
+ 1233  ./a.out 
+ 1234  mysql -u -p
+ 1235  mysql -u root -p
+ 1236  vim test.c 
+ 1237  gcc test.c 
+ 1238  gcc test.c -lcrypt
+ 1239  ./a.out 
+ 1240  mysql -u root -p
+ 1241  ./a.out xjl 123
+ 1242  cd wangdao/20190401/
+ 1243  ll
+ 1244  gcc query.c 
+ 1245  gcc query.c -lmysqlclient
+ 1246  vim query.c 
+ 1247  ./a.out xjl 123
+ 1248  ./a.out zhangsan 123
+ 1249  ./a.out helei helei123
+ 1250  ./a.out lisi 123
+ 1251  cd ../project/netpan/2/server/src/
+ 1252  vim login_check.c
+ 1253  man 2 recv
+ 1254  cd wangdao/project/netpan/2/clent/src/
+ 1255  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1256  ./BigTrainClient 127.1.1.1 8888
+ 1257  vim client.c 
+ 1258  make
+ 1259  ./BigTrainClient 127.1.1.1 8888
+ 1260  vim client.c 
+ 1261  make
+ 1262  ./BigTrainClient 127.1.1.1 8888
+ 1263  vim client.c 
+ 1264  ./BigTrainClient 127.1.1.1 8888
+ 1265  vim client.c 
+ 1266  make
+ 1267  ./BigTrainClient 127.1.1.1 8888
+ 1268  vim client.c 
+ 1269  make
+ 1270  ./BigTrainClient 127.1.1.1 8888
+ 1271  vim client.c 
+ 1272  make
+ 1273  ./BigTrainClient 127.1.1.1 8888
+ 1274  vim client.c 
+ 1275  make
+ 1276  ./BigTrainClient 127.1.1.1 8888
+ 1277  vim client.c 
+ 1278  make
+ 1279  ./BigTrainClient 127.1.1.1 8888
+ 1280  vim client.c 
+ 1281  make
+ 1282  ./BigTrainClient 127.1.1.1 8888
+ 1283  vim client.c 
+ 1284  ./BigTrainClient 127.1.1.1 8888
+ 1285  vim client.c 
+ 1286  make
+ 1287  ./BigTrainClient 127.1.1.1 8888
+ 1288  vim client.c 
+ 1289  ./BigTrainClient 127.1.1.1 8888
+ 1290  vim client.c 
+ 1291  make
+ 1292  ./BigTrainClient 127.1.1.1 8888
+ 1293  vim client.c 
+ 1294  ./BigTrainClient 127.1.1.1 8888
+ 1295  make
+ 1296  vim client.c 
+ 1297  ./BigTrainClient 127.1.1.1 8888
+ 1298  make
+ 1299  ./BigTrainClient 127.1.1.1 8888
+ 1300  vim client.c 
+ 1301  make
+ 1302  ./BigTrainClient 127.1.1.1 8888
+ 1303  make
+ 1304  ./BigTrainClient 127.1.1.1 8888
+ 1305  vim client.c 
+ 1306  make
+ 1307  ./BigTrainClient 127.1.1.1 8888
+ 1308  vim client.c 
+ 1309  make
+ 1310  ./BigTrainClient 127.1.1.1 8888
+ 1311  vim client.c 
+ 1312  make
+ 1313  ./BigTrainClient 127.1.1.1 8888
+ 1314  qe
+ 1315  r
+ 1316  vim client.c 
+ 1317  make
+ 1318  ./BigTrainClient 127.1.1.1 8888
+ 1319  vim client.c 
+ 1320  make
+ 1321  ./BigTrainClient 127.1.1.1 8888
+ 1322  vim client.c 
+ 1323  ./BigTrainClient 127.1.1.1 8888
+ 1324  vim client.c 
+ 1325  ./BigTrainClient 127.1.1.1 8888
+ 1326  vim client.c 
+ 1327  make
+ 1328  ./BigTrainClient 127.1.1.1 8888
+ 1329  vim client.c 
+ 1330  echo hello>file
+ 1331  ll
+ 1332  md5sum file
+ 1333  cd ../
+ 1334  mkdir file
+ 1335  cd file/
+ 1336  echo hello>file
+ 1337  pwd
+ 1338  cd ../clent/src/
+ 1339  .
+ 1340  ./BigTrainClient 127.1.1.1 8888
+ 1341  vim tranfile.c
+ 1342  vim client.c 
+ 1343  vim mmysql.h
+ 1344  vim client.c 
+ 1345  make
+ 1346  ./BigTrainClient 127.1.1.1 8888
+ 1347  vim client.c 
+ 1348  make
+ 1349  ./BigTrainClient 127.1.1.1 8888
+ 1350  vim client.c 
+ 1351  ./BigTrainClient 127.1.1.1 8888
+ 1352  vim client.c 
+ 1353  make
+ 1354  ./BigTrainClient 127.1.1.1 8888
+ 1355  vim client.c 
+ 1356  make
+ 1357  ./BigTrainClient 127.1.1.1 8888
+ 1358  vim client.c 
+ 1359  ./BigTrainClient 127.1.1.1 8888
+ 1360  vim client.c 
+ 1361  make
+ 1362  ./BigTrainClient 127.1.1.1 8888
+ 1363  vim client.c 
+ 1364  ./BigTrainClient 127.1.1.1 8888
+ 1365  vim client.c 
+ 1366  make
+ 1367  ./BigTrainClient 127.1.1.1 8888
+ 1368  make
+ 1369  ./BigTrainClient 127.1.1.1 8888
+ 1370  vim client.c 
+ 1371  make
+ 1372  ./BigTrainClient 127.1.1.1 8888
+ 1373  vim client.c 
+ 1374  make
+ 1375  ./BigTrainClient 127.1.1.1 8888
+ 1376  vim client.c 
+ 1377  make
+ 1378  ./BigTrainClient 127.1.1.1 8888
+ 1379  vim client.c 
+ 1380  sudo shutdown -h 0
+ 1381  mysql -u root -p
+ 1382  man strcpy
+ 1383  mysql -u root -p
+ 1384  cd wangdao/project/netpan/2/server/src/
+ 1385  ./server 127.1.1.1 8888 5 10
+ 1386  vim server.c 
+ 1387  vim Makefile 
+ 1388  make
+ 1389  vim Makefile 
+ 1390  make
+ 1391  vim head.h 
+ 1392  make
+ 1393  vim Makefile 
+ 1394  make
+ 1395  ll
+ 1396  rm server
+ 1397  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1398  vim server.c 
+ 1399  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1400  vim login_check.c
+ 1401  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1402  make
+ 1403  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1404  vim login_check.c
+ 1405  vim server.c 
+ 1406  make
+ 1407  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1408  vim login_check.c
+ 1409  vim login_check.h
+ 1410  vim server.c 
+ 1411  make
+ 1412  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1413  vim server.c 
+ 1414  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1415  vim server.c 
+ 1416  make
+ 1417  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1418  vim server.c 
+ 1419  make
+ 1420  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1421  vim server.c 
+ 1422  make
+ 1423  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1424  vim server.c 
+ 1425  make
+ 1426  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1427  vim server.c 
+ 1428  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1429  vim server.c 
+ 1430  make
+ 1431  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1432  vim server.c 
+ 1433  make
+ 1434  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1435  vim server.c 
+ 1436  make
+ 1437  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1438  vim server.c 
+ 1439  vim login_check.c
+ 1440  vim server.c 
+ 1441  make
+ 1442  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1443  vim server.c 
+ 1444  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1445  vim server.c 
+ 1446  make
+ 1447  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1448  vim server.c 
+ 1449  vim login_check.c
+ 1450  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1451  vim login_check.c
+ 1452  make
+ 1453  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1454  vim login_check.c
+ 1455  vim login_check.h
+ 1456  vim login_check.c
+ 1457  vim login_check.h
+ 1458  vim login_check.c
+ 1459  vim login_check.h
+ 1460  vim login_check.c
+ 1461  vim login_check.h
+ 1462  vim login_check.c
+ 1463  vim login_check.h
+ 1464  vim login_check.c
+ 1465  vim login_check.h
+ 1466  vim login_check.c
+ 1467  vim login_check.h
+ 1468  vim login_check.c
+ 1469  vim factory.c
+ 1470  vim login_check.c
+ 1471  vim factory.c
+ 1472  vim server.c 
+ 1473  vim login_check.c
+ 1474  vim factory.c
+ 1475  vim login_check.c
+ 1476  make
+ 1477  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1478  vim login_check.c
+ 1479  vim factory.c
+ 1480  vim factory.h
+ 1481  vim server.c 
+ 1482  vim factory.h
+ 1483  vim work_que.h
+ 1484  vim server.c 
+ 1485  vim factory.c
+ 1486  make
+ 1487  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1488  vim factory.c
+ 1489  vim login_check.c
+ 1490  make
+ 1491  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1492  vim login_check.c
+ 1493  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1494  vim login_check.c
+ 1495  make
+ 1496  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1497  vim login_check.c
+ 1498  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1499  vim login_check.c
+ 1500  make
+ 1501  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1502  vim login_check.c
+ 1503  make
+ 1504  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1505  vim login_check.c
+ 1506  make
+ 1507  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1508  vim login_check.c
+ 1509  make
+ 1510  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1511  vim login_check.c
+ 1512  make
+ 1513  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1514  vim login_check.c
+ 1515  make
+ 1516  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1517  vim login_check.c
+ 1518  make
+ 1519  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1520  cd wangdao/20190401/
+ 1521  ./a.out xjl 123
+ 1522  vim crypt.c 
+ 1523  gcc crypt.c -lcrypt
+ 1524  ./a.out xjl 123
+ 1525  vim crypt.c 
+ 1526  gcc crypt.c -lcrypt
+ 1527  vim crypt.c 
+ 1528  gcc crypt.c -lcrypt
+ 1529  ./a.out xjl 123
+ 1530  vim crypt.c 
+ 1531  gcc crypt.c -lcrypt
+ 1532  ./a.out 123 xjl
+ 1533  vim crypt.c 
+ 1534  gcc crypt.c -lcrypt
+ 1535  ./a.out 123 xjl
+ 1536  vim crypt.c 
+ 1537  gcc crypt.c -lcrypt
+ 1538  vim crypt.c 
+ 1539  gcc crypt.c -lcrypt
+ 1540  vim crypt.c 
+ 1541  gcc crypt.c -lcrypt
+ 1542  vim crypt.c 
+ 1543  gcc crypt.c -lcrypt
+ 1544  vim crypt.c 
+ 1545  gcc crypt.c -lcrypt
+ 1546  vim crypt.c 
+ 1547  gcc crypt.c -lcrypt
+ 1548  vim crypt.c 
+ 1549  gcc crypt.c -lcrypt
+ 1550  vim crypt.c 
+ 1551  gcc crypt.c -lcrypt
+ 1552  gcc crypt.c -lcrypt -I /usr/include/mysql/ -lmysqlclient
+ 1553  vim crypt.c 
+ 1554  gcc crypt.c -lcrypt -I /usr/include/mysql/ -lmysqlclient
+ 1555  vim crypt.c 
+ 1556  gcc crypt.c -lcrypt -I /usr/include/mysql/ -lmysqlclient
+ 1557  vim crypt.c 
+ 1558  gcc crypt.c -lcrypt -I /usr/include/mysql/ -lmysqlclient
+ 1559  vim crypt.c 
+ 1560  gcc crypt.c -lcrypt -I /usr/include/mysql/ -lmysqlclient
+ 1561  vim crypt.c 
+ 1562  gcc crypt.c -lcrypt -I /usr/include/mysql/ -lmysqlclient
+ 1563  vim crypt.c 
+ 1564  gcc crypt.c -lcrypt -I /usr/include/mysql/ -lmysqlclient
+ 1565  vim crypt.c 
+ 1566  vim ../project/netpan/2/server/src/login_check.c
+ 1567  vim crypt.c 
+ 1568  vim show.c
+ 1569  sudo vim /usr/include/func.h 
+ 1570  vim show.c
+ 1571  gcc show.c
+ 1572  vim show.c
+ 1573  gcc show.c
+ 1574  vim show.c
+ 1575  vim show.c -I /usr/include/mysql/ -lmysqlclient
+ 1576  ./a.out 
+ 1577  ./a.out fd
+ 1578  ./a.out fda df
+ 1579  vim show.c -I /usr/include/mysql/ -lmysqlclient
+ 1580  sudo vim /usr/include/func.h 
+ 1581  gcc show.c 
+ 1582  ./a.out  1
+ 1583  vim show.c
+ 1584  gcc show.c -I /usr/include/mysql/ -lmysqlclient
+ 1585  ./a.out 
+ 1586  vim show.c
+ 1587  mysql -u root -p
+ 1588  cd wangdao/project/netpan/2/file/
+ 1589  ll
+ 1590  echo world>hello
+ 1591  ll
+ 1592  md5sum hello
+ 1593  pwd
+ 1594  mkdir test
+ 1595  md5sum test
+ 1596  ll
+ 1597  echo hello>test
+ 1598  touch test
+ 1599  ll
+ 1600  cd test/
+ 1601  echo hello>test
+ 1602  md5sum test cd
+ 1603  cd ..
+ 1604  rm - r test/
+ 1605  rm -r test/
+ 1606  cd wangdao/project/netpan/2/clent/src/
+ 1607  ./BigTrainClient 127.1.1.1 8888
+ 1608  vim show.c
+ 1609  vim client.c 
+ 1610  make
+ 1611  ./BigTrainClient 127.1.1.1 8888
+ 1612  vim client.c 
+ 1613  ll
+ 1614  make
+ 1615  make clean
+ 1616  ll
+ 1617  vim factory.h
+ 1618  vim factory.c
+ 1619  cd wangdao/project/netpan/2/server/src/
+ 1620  cd wangdao/project/netpan/2/server/src/
+ 1621  vim factory.h 
+ 1622  vim third.h
+ 1623  cd ../../clent/src/
+ 1624  vim factory.h
+ 1625  vim client.c 
+ 1626  vim third.c
+ 1627  ll
+ 1628  vim factory.c
+ 1629  vim factory.h
+ 1630  vim mmysql.h 
+ 1631  vim factory.h
+ 1632  vim mmysql.h 
+ 1633  vim factory.c
+ 1634  vim factory.h
+ 1635  vim factory.c
+ 1636  vim factory.h
+ 1637  vim factory.c
+ 1638  vim factory.h
+ 1639  make
+ 1640  vim client.c 
+ 1641  cd wangdao/project/netpan/2/server/src/
+ 1642  ./BigTrainClient 127.1.1.1 5 10
+ 1643  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1644  vim server.c 
+ 1645  vim factory.c
+ 1646  vim server.c 
+ 1647  vim factory.c
+ 1648  make
+ 1649  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1650  vim factory.c
+ 1651  make
+ 1652  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1653  vim factory.c
+ 1654  make
+ 1655  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1656  vim factory.c
+ 1657  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1658  make
+ 1659  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1660  vim factory.c
+ 1661  make
+ 1662  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1663  vim login_check.c
+ 1664  vim factory.h
+ 1665  vim head.h 
+ 1666  vim factory.h
+ 1667  vim factory.c
+ 1668  vim login_check.c
+ 1669  cp ../../../1/server/src/
+ 1670  cp ../../../1/server/src/first_function* .
+ 1671  ll
+ 1672  rm first_function.o
+ 1673  vim first_function.c
+ 1674  rm first_function*
+ 1675  ll
+ 1676  vim third.c
+ 1677  mv third.c third.h
+ 1678  ll
+ 1679  vim factory.c
+ 1680  factory.h
+ 1681  vim factory.h
+ 1682  vim third.h
+ 1683  vim third.c
+ 1684  vim factory.c
+ 1685  vim factory.h
+ 1686  vim factory.c
+ 1687  ll
+ 1688  vim login_check.c
+ 1689  vim login_check.h
+ 1690  vim factory.h
+ 1691  vim factory.c
+ 1692  vim factory.
+ 1693  vim login_check.h
+ 1694  vim third.c
+ 1695  vim login_check.c
+ 1696  vim third.c
+ 1697  vim third.h
+ 1698  vim factory.h
+ 1699  vim factory.c
+ 1700  vim third.h
+ 1701  vim factory.c
+ 1702  make
+ 1703  vim factory.c
+ 1704  vim third.c
+ 1705  make
+ 1706  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1707  vim third.c
+ 1708  vim login_check.c
+ 1709  vim factory.c
+ 1710  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1711  vim login_check.c
+ 1712  make
+ 1713  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1714  vim login_check.c
+ 1715  make
+ 1716  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1717  vim login_check.c
+ 1718  vim factory.c
+ 1719  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1720  make
+ 1721  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1722  vim login_check.c
+ 1723  vim third.c
+ 1724  vim factory.c
+ 1725  make
+ 1726  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1727  vim third.c
+ 1728  make
+ 1729  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1730  vim third.c
+ 1731  vim login_check.c
+ 1732  make
+ 1733  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1734  vim login_check.c
+ 1735  make
+ 1736  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1737  vim login_check.c
+ 1738  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1739  vim login_check.c
+ 1740  make
+ 1741  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1742  man strcpy
+ 1743  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1744  cd wangdao/20190402/
+ 1745  vim show.c 
+ 1746  vim show.c
+ 1747  ll
+ 1748  cd Compute-file-or-string-md5-master/
+ 1749  vim main_md5.c 
+ 1750  cd ..
+ 1751  vim main_md5.c 
+ 1752  vim show.c
+ 1753  sudo apt-get install libssl-dev
+ 1754  man MD5
+ 1755  cd wangdao/20190402/
+ 1756  ll
+ 1757  vim test.c
+ 1758  gcc test.c 
+ 1759  ./a.out 
+ 1760  vim test.c
+ 1761  gcc test.c 
+ 1762  ./a.out 
+ 1763  cd wangdao/project/netpan/2/clent/src/
+ 1764  ulimit -c unlimited
+ 1765  vim Makefile 
+ 1766  make
+ 1767  make clean 
+ 1768  make
+ 1769  ./BigTrainClient 127.1.1.1 8888
+ 1770  gdb BigTrainClient core 
+ 1771  ulimit -c 0
+ 1772  rm core 
+ 1773  vim Makefile 
+ 1774  vim factory.c
+ 1775  make
+ 1776  ./BigTrainClient 
+ 1777  ./BigTrainClient 127.1.1.1 8888
+ 1778  vim factory.c
+ 1779  make
+ 1780  ./BigTrainClient 127.1.1.1 8888
+ 1781  vim factory.c
+ 1782  make
+ 1783  vim factory.c
+ 1784  make
+ 1785  ./BigTrainClient 127.1.1.1 8888
+ 1786  ls
+ 1787  ./BigTrainClient 127.1.1.1 8888
+ 1788  vim factory.c
+ 1789  make
+ 1790  ./BigTrainClient 127.1.1.1 8888
+ 1791  cd wangdao/project/netpan/2/server/src/
+ 1792  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1793  vim show.c
+ 1794  vim login_check.c
+ 1795  make
+ 1796  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1797  mysql -u root -p
+ 1798  cd wangdao/project/netpan/2/clent/src/
+ 1799  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1800  ./BigTrainClient 127.1.1.1 8888
+ 1801  ulimit -c unlimited
+ 1802  vim Makefile 
+ 1803  make
+ 1804  make clean 
+ 1805  make
+ 1806  vim Makefile 
+ 1807  gcc -g *.c
+ 1808  gcc -g *.c -lcrypt -I /usr/include/mysql/ -lmysqlclient
+ 1809  ./a.out 127.1.1.1 8888
+ 1810  ll
+ 1811  gdb a.out core 
+ 1812  vim factory.c
+ 1813  ./a.out 127.1.1.1 8888
+ 1814  vim factory.c
+ 1815  make
+ 1816  ./a.out 127.1.1.1 8888
+ 1817  vim factory.c
+ 1818  make
+ 1819  ./a.out 127.1.1.1 8888
+ 1820  vim factory.c
+ 1821  make
+ 1822  ./a.out 127.1.1.1 8888
+ 1823  vim factory.c
+ 1824  make
+ 1825  ./BigTrainClient 127.1.1.1 8888
+ 1826  vim factory.c
+ 1827  make
+ 1828  ./BigTrainClient 127.1.1.1 8888
+ 1829  vim factory.c
+ 1830  make
+ 1831  ./BigTrainClient 127.1.1.1 8888
+ 1832  sudo shutdown -h 0
+ 1833  cd wangdao/project/netpan/2/server/src/
+ 1834  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1835  cd ..
+ 1836  cd ../clent/src/
+ 1837  vim factory.c
+ 1838  vim client.c 
+ 1839  vim factory.c
+ 1840  cd wangdao/project/netpan/2/server/src/
+ 1841  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1842  cd wangdao/20190402/
+ 1843  vim show.c 
+ 1844  mysql -u root -p
+ 1845  cd wangdao/project/netpan/2/clent/src/
+ 1846  cd ..
+ 1847  buildNewDD 
+ 1848  cd ~/wangdao/20190403/
+ 1849  cp -r ../project/netpan/2/server/src/  server
+ 1850  ll
+ 1851  cd server/
+ 1852  ll
+ 1853  vim third.c
+ 1854  make
+ 1855  vim third.h
+ 1856  vim factory.c
+ 1857  make
+ 1858  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1859  vim factory.c
+ 1860  vim third.h
+ 1861  vim third.c
+ 1862  make
+ 1863  vim third.h
+ 1864  vim factory.c
+ 1865  vim login_check.h
+ 1866  vim login_check.c
+ 1867  vim factory.c
+ 1868  make
+ 1869  vim factory.c
+ 1870  vim third.c
+ 1871  make
+ 1872  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1873  vim third.c
+ 1874  make
+ 1875  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1876  vim third.c
+ 1877  make
+ 1878  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1879  vim third.c
+ 1880  make
+ 1881  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1882  vim third.c
+ 1883  make
+ 1884  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1885  vim third.c
+ 1886  make
+ 1887  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1888  vim third.c
+ 1889  make
+ 1890  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1891  vim third.c
+ 1892  vim factory.c
+ 1893  make
+ 1894  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1895  vim factory.c
+ 1896  vim login_check.c
+ 1897  make
+ 1898  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1899  :x
+ 1900  vim login_check.c
+ 1901  make
+ 1902  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1903  vim login_check.c
+ 1904  make
+ 1905  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1906  vim login_check.c
+ 1907  make
+ 1908  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1909  vim login_check.c
+ 1910  make
+ 1911  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1912  vim login_check.c
+ 1913  make
+ 1914  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1915  vim login_check.c
+ 1916  make
+ 1917  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1918  vim login_check.c
+ 1919  vim third.c
+ 1920  make
+ 1921  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1922  vim factory.c
+ 1923  vim third.c
+ 1924  vim login_check.c
+ 1925  make
+ 1926  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1927  vim login_check.c
+ 1928  vim third.c
+ 1929  make
+ 1930  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1931  vim third.c
+ 1932  make
+ 1933  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1934  vim third.c
+ 1935  make
+ 1936  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1937  vim third.c
+ 1938  make
+ 1939  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1940  vim third.c
+ 1941  make
+ 1942  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1943  vim third.c
+ 1944  make
+ 1945  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1946  vim third.c
+ 1947  make
+ 1948  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1949  vim third.c
+ 1950  make
+ 1951  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1952  vim third.c
+ 1953  make
+ 1954  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1955  vim third.c
+ 1956  make
+ 1957  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1958  vim third.c
+ 1959  make
+ 1960  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1961  vim third.c
+ 1962  vim factory.c
+ 1963  make 
+ 1964  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1965  vim factory.c
+ 1966  vim third.c
+ 1967  vim login_check.c
+ 1968  make
+ 1969  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1970  vim login_check.c
+ 1971  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1972  vim third.c
+ 1973  make
+ 1974  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1975  vim third.c
+ 1976  make
+ 1977  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1978  vim third.c
+ 1979  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1980  vim third.c
+ 1981  vim factory.c
+ 1982  vim login_check.c
+ 1983  make
+ 1984  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1985  vim login_check.c
+ 1986  make
+ 1987  ./BigTrainClient 127.1.1.1 8888 5 10
+ 1988  cd ..
+ 1989  cd ../1.1/server
+ 1990  ll
+ 1991  vim third.c
+ 1992  cd ../../
+ 1993  mkdir test
+ 1994  cd test/
+ 1995  vim delete.c
+ 1996  cd wangdao/20190402/
+ 1997  vim upmd5.c 
+ 1998  ./a.out ../20190403/1.1/server/server.c 
+ 1999  vim upmd5.c 
+ 2000  cd ../20190403/1.1/client/
+ 2001  ll
+ 2002  md5sum file 
+ 2003  history>history

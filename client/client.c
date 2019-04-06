@@ -141,12 +141,18 @@ int main(int argc,char** argv)
     while(1)
     {
 LogStart:
+        system("clear");
         memset(userSelect,0,sizeof(userSelect));
         printf("1.Login Account\n2.Registered Account\nSelect num:\n");
         read(STDIN_FILENO,userSelect,sizeof(userSelect));
         if(strlen(userSelect)>2)
         {
             printf("Commond Error!\n");
+            goto LogStart;
+        }
+        if(userSelect[0]>'9'||userSelect[0]<'0')
+        {
+            printf("Commond Error\n");
             goto LogStart;
         }
         userSelect[strlen(userSelect)-1] = '\0';

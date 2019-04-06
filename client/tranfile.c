@@ -2,6 +2,7 @@
 extern char uploadNameOfFile[64];
 int RecvFile(int sockfd)
 {
+    printf("Start Gets File!\n");
     int ret = 0;
     int size = 0;
     off_t filesize = 0;
@@ -47,6 +48,7 @@ int RecvFile(int sockfd)
 
 int SendFile(int sockfd,char* filename)
 {
+    printf("Start translation File!\n");
     train t;
     char uploadFlag[2]="0";
     int uploadsize=0;
@@ -62,7 +64,7 @@ int SendFile(int sockfd,char* filename)
     ret = SendCycle(sockfd,(char *)&t,4+t.dataLen);
     RETURN_MINUSONE(-1,ret,"SendCycle");
 
-    int fd = open(filename,O_RDONLY);
+    int fd = open(filename,O_RDWR);
     //get upload date;
     sprintf(uploadNameOfFile,"%s_uploadLog",uploadNameOfFile);
     int fd2 = open(uploadNameOfFile,O_RDONLY|O_CREAT,0600);
@@ -84,7 +86,7 @@ int SendFile(int sockfd,char* filename)
     {
         RecvCycle(sockfd,(char*)&uploadsize,sizeof(int));
     }
-    if(filesize > 104857600)
+    if(filesize < 104857600)
     {
         lseek(fd,uploadsize,SEEK_SET);
         printf("upsize:%d\n",uploadsize);
@@ -100,12 +102,20 @@ int SendFile(int sockfd,char* filename)
                 fflush(stdout);
             }
         }
+        ret = SendCycle(sockfd,(char *)&t,4);
     }
     else
     {
+        char* pMmap;
+        pMmap = (char*)mmap(NULL,filesize,PROT_READ,MAP_SHARED,fd,uploadsize*4096);
+        printf("ss:%d\n",uploadsize);
+        filesize = filesize-(uploadsize*4096);
+        ret = SendCycle(sockfd,pMmap,filesize);
+        t.dataLen = 0;
+        ret = SendCycle(sockfd,(char*)&t.dataLen,4);
+        munmap(pMmap,filesize);
     }
     printf("100.00%s\n","%");
-    ret = SendCycle(sockfd,(char *)&t,4);
     RETURN_MINUSONE(-1,ret,"SendCycle");
     printf("Send Success!\n");
     close(fd);

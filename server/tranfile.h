@@ -9,6 +9,7 @@ typedef struct
 
 int SendCycle(int,char*,int);
 int RecvCycle(int,char*,int);
+int RecvCycBig(int,char*,int,int,int);
 int RecvFile(int,char*);
 int SendFile(int,char*,char*);
 int TcpInitClient(int*,char*,char*);

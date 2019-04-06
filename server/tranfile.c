@@ -2,6 +2,9 @@
 
 int RecvFile(int sockfd,char* fn)
 {
+    int fd;
+    int uploadtmp;
+    int opseat;
     int ret = 0;
     int size = 0;
     off_t filesize = 0;
@@ -21,46 +24,100 @@ int RecvFile(int sockfd,char* fn)
     uploadFlag = sizebuf[strlen(sizebuf)-1];
     sizebuf[strlen(sizebuf)-1] = '\0';
     filesize = atoi(sizebuf);
-    puts(sizebuf);
-    printf("flag:%c\n",uploadFlag);
     RETURN_MINUSONE(-1,ret,"RecvCycle");
     //recv file data
     printf("filename:%s,filesize:%ld\n",filename,filesize);
     if(uploadFlag=='1')
     {
-        int fd = open(fn,O_RDWR|O_APPEND);
-        struct stat ss;
-        fstat(fd,&ss);
-        size = ss.st_size;
-        SendCycle(sockfd,(char*)&size,sizeof(int));
-        while(1)
+        if(filesize < 104857600)
         {
-            ret = RecvCycle(sockfd,(char*)&size,sizeof(int));
-            if(size <= 0)
+            fd = open(fn,O_RDWR|O_APPEND);
+            struct stat ss;
+            fstat(fd,&ss);
+            size = ss.st_size;
+            SendCycle(sockfd,(char*)&size,sizeof(int));
+            while(1)
             {
-                break;
+                ret = RecvCycle(sockfd,(char*)&size,sizeof(int));
+                if(size <= 0)
+                {
+                    break;
+                }
+                ret = RecvCycle(sockfd,buf,size);
+                RETURN_MINUSONE(-1,ret,"RecvCycle");
+                write(fd,buf,size);
             }
-            ret = RecvCycle(sockfd,buf,size);
-            RETURN_MINUSONE(-1,ret,"RecvCycle");
-            write(fd,buf,size);
+            close(fd);
+            printf("Recv Success!\n");
         }
-        printf("Recv Success!\n");
+        else
+        {
+            fd = open(fn,O_RDWR);
+            struct stat ss;
+            fstat(fd,&ss);
+            opseat = (ss.st_blocks-1)/8;
+            uploadtmp = filesize - (opseat*4096);
+            printf("tmp:%d|op:%d|file:%ld\n",uploadtmp,opseat,filesize);
+            SendCycle(sockfd,(char*)&opseat,sizeof(int));
+            char* pMmap;
+            pMmap = (char*)mmap(NULL,filesize,PROT_WRITE|PROT_READ,MAP_SHARED,fd,opseat*4096);
+            ret = RecvCycBig(sockfd,pMmap,uploadtmp,opseat*4096,filesize);
+            printf("opseat:%d\n",opseat);
+            if(-1 == ret)
+            {
+                return -2;
+            }
+            munmap(pMmap,filesize);
+            ret = RecvCycle(sockfd,(char*)&size,sizeof(int));
+            printf("Recv Success!\n");
+            close(fd);
+        }
+
     }
     else
     {
-        int fd = open(fn,O_RDWR|O_CREAT,0666);
-        while(1)
+        if(filesize < 104857600)
         {
-            ret = RecvCycle(sockfd,(char*)&size,sizeof(int));
-            if(size <= 0)
+            fd = open(fn,O_RDWR|O_CREAT,0666);
+            while(1)
             {
-                break;
+                ret = RecvCycle(sockfd,(char*)&size,sizeof(int));
+                if(-1 == ret)
+                {
+                    return -2;
+                }
+                if(size <= 0)
+                {
+                    break;
+                }
+                ret = RecvCycle(sockfd,buf,size);
+                RETURN_MINUSONE(-1,ret,"RecvCycle");
+                write(fd,buf,size);
             }
-            ret = RecvCycle(sockfd,buf,size);
-            RETURN_MINUSONE(-1,ret,"RecvCycle");
-            write(fd,buf,size);
+            close(fd);
+            printf("Recv Success!\n");
         }
-        printf("Recv Success!\n");
+        else
+        {
+            uploadtmp = filesize;
+            opseat = 0;
+            char* mp;
+            int fd = open(fn,O_RDWR|O_CREAT,0666);
+            ret = ftruncate(fd,filesize);
+            if(-1 == ret)
+            {
+                perror("ftruncate");
+            }
+            mp = (char*)mmap(NULL,filesize,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
+            ret = RecvCycBig(sockfd,mp,uploadtmp,opseat,filesize);
+            if(-1 == ret)
+            {
+                return -2;
+            }
+            munmap(mp,filesize);
+            ret = RecvCycle(sockfd,(char*)&size,sizeof(int));
+            close(fd);
+        }
     }
     return 0;
 }

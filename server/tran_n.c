@@ -22,11 +22,30 @@ int RecvCycle(int fd,char* recvFile,int recvLen)
     while(recvTotal<recvLen)
     {
         ret = recv(fd,recvFile+recvTotal,recvLen-recvTotal,0);
-        if(0 == ret)
+        if(0  == ret)
         {
             return -1;
         }
         recvTotal += ret;
+    }
+    return 0;
+}
+
+int RecvCycBig(int fd,char* recvFile,int recvLen,int recvtotl,int filesize)
+{
+    int recvTotal = 0;
+    int ret;
+    while(recvTotal<recvLen)
+    {
+        ret = recv(fd,recvFile+recvTotal,recvLen-recvTotal,0);
+        if(0  == ret)
+        {
+            return -1;
+        }
+        recvTotal +=ret;
+        recvtotl += ret;
+        printf("%d\r",recvTotal);
+        fflush(stdout);
     }
     return 0;
 }

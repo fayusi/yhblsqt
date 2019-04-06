@@ -15,6 +15,8 @@ int SendCycle(int fd,char* sendFile,int sendLen)
         }
         sendTotal += ret;
         uploadNumberOfCharactor +=ret;
+        printf("%d\r",sendTotal);
+        fflush(stdout);
     }
     return 0;
 }

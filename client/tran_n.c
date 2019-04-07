@@ -35,4 +35,21 @@ int RecvCycle(int fd,char* recvFile,int recvLen)
     }
     return 0;
 }
-
+int RecvCycBig(int fd,char* recvFile,int recvLen,int recvtotl,int filesize)
+{
+    int recvTotal = 0;
+    int ret;
+    while(recvTotal<recvLen)
+    {
+        ret = recv(fd,recvFile+recvTotal,recvLen-recvTotal,0);
+        if(0  == ret)
+        {
+            return -1;
+        }
+        recvTotal +=ret;
+        recvtotl += ret;
+        printf("%5.2f%s\r",(recvTotal*1.0)/filesize,"%");
+        fflush(stdout);
+    }
+    return 0;
+}

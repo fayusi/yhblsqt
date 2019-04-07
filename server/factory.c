@@ -1,5 +1,20 @@
 #include"factory.h"
 #include"third.h"
+int uploadNumberOfCharactor;
+char uploadNameOfFile[64] = {0};
+void cleanFunc(void* pArg)
+{
+    pFactory_t pf = (pFactory_t)pArg;
+    printf("unlock\n");
+    pthread_mutex_unlock(&pf->que.que_mutex);
+    if(uploadNumberOfCharactor)
+    {
+        int fd = open(uploadNameOfFile,O_WRONLY);
+        sprintf(uploadNameOfFile,"%d",uploadNumberOfCharactor);
+        write(fd,uploadNameOfFile,strlen(uploadNameOfFile));
+        close(fd);
+    }
+}
 void* creatThread(void* factory)
 {
     pFactory_t pf = (pFactory_t)factory;
@@ -14,15 +29,25 @@ void* creatThread(void* factory)
     {
 Rebirth:        
         getSuccess = 1;
+        pthread_cleanup_push(cleanFunc,(void*)pf);
         pthread_mutex_lock(&pf->que.que_mutex);
+        printf("endFlag=%d\n",pf->endFlag);
+        if(pf->endFlag)
+        {
+            clientnum=0;
+            pthread_exit(NULL);
+        }
         if(!pf->que.que_size)
         {
+            puts("thread wait");
             pthread_cond_wait(&pf->cond,&pf->que.que_mutex);
+            puts("thread start");
         }
-        getSuccess = QueGet(&pf->que,&pcur);
+        getSuccess = QueGet(&pf->que,&pcur);    
         clientnum++;
         printf("%d client connected\n",clientnum);
         pthread_mutex_unlock(&pf->que.que_mutex);
+        pthread_cleanup_pop(0);
         if(!getSuccess)
         {
             LinkMysql(&conn);

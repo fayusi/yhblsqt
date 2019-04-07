@@ -177,6 +177,10 @@ int SendRM(MYSQL* conn,char* filename,char* pwd,char* ownername)
             {
                 i++;
                 strcpy(md5,row[5]);
+                if(!strcmp(row[3],"d"))
+                {
+                    return -1;
+                }
             }
             if(i==0)
             {
@@ -407,6 +411,67 @@ SndFile:
     }
     return 0;
 }
+int MakeDIR(int sockfd,MYSQL* conn,char* dirname,char* pwd,char* ownername)
+{
+    char fnbuf[64] = {0};
+    MYSQL_RES* res;
+    MYSQL_ROW row;
+    int fnlen=strlen(dirname);
+    int i,ret,mfRSize;
+    char query[1024];
+    for(i = 0;i<fnlen-1;i++)
+    {
+        dirname[i]=dirname[i+1];
+    }
+    dirname[i]='\0';
+    strcpy(fnbuf,dirname);
+CheckStart:
+    memset(query,0,sizeof(query));
+    strcpy(query,"select * from file where file_name='");
+    sprintf(query,"%s%s' and file_owner='%s' and file_belong_directory='%s'",query,fnbuf,ownername,pwd);
+    puts(query);
+    ret = mysql_query(conn,query);
+    if(ret)
+    {
+        printf("记录到错误日志中去:%s\n",mysql_error(conn));
+    }
+    res = mysql_use_result(conn);
+    if(res)
+    {
+        i=0;
+        while((row = mysql_fetch_row(res))!=NULL)
+        {
+            i++;
+        }
+        if(i)
+        {
+            memset(fnbuf,0,sizeof(fnbuf));
+            ret = send(sockfd,"error",5,0);
+            ret = RecvCycle(sockfd,(char*)&mfRSize,sizeof(int));
+            if(-1 == mfRSize)
+            {
+                return -2;
+            }
+            ret = RecvCycle(sockfd,fnbuf,mfRSize);
+            goto CheckStart;
+        }
+        else
+        {
+            ret = send(sockfd,"okay!",5,0);
+        }
+    }
+    memset(query,0,sizeof(query));
+    strcpy(query,
+           "insert into file(file_name,file_belong_directory,file_type,file_size,file_md5,file_owner) values('");
+    sprintf(query,"%s%s','%s','d','4096','0','%s')",query,fnbuf,pwd,ownername);
+    puts(query);
+    ret = mysql_query(conn,query);
+    if(ret)
+    {
+        printf("记录到错误日志中去:%s\n",mysql_error(conn));
+    }
+    return 0;
+}
 int ExecuteOparet(int sockfd,MYSQL* conn,char* pwd,char* ownername)
 {
     train oc;
@@ -501,6 +566,20 @@ int ExecuteOparet(int sockfd,MYSQL* conn,char* pwd,char* ownername)
             int size =strlen(path);
             send(sockfd,&size,sizeof(int),0);
             send(sockfd,path,size,0);
+        }
+        break;
+        //MKD_FLAG
+    case 6:
+        ret = MakeDIR(sockfd,conn,oc.buf,pwd,ownername);
+        if(0 == ret)
+        {
+            int size =sizeof("success");
+            send(sockfd,&size,sizeof(int),0);
+            send(sockfd,"success",size,0);
+        }
+        if(-2 == ret)
+        {
+            return -2;
         }
         break;
     }

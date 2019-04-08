@@ -163,6 +163,7 @@ int SendRM(MYSQL* conn,char* filename,char* pwd,char* ownername)
     filename[i]='\0';
     strcpy(query,"select * from file where file_belong_directory='");
     sprintf(query,"%s%s' and file_name='%s' and file_owner='%s'",query,pwd,filename,ownername);
+    puts(query);
     i=mysql_query(conn,query);
     if(i)
     {
@@ -179,7 +180,7 @@ int SendRM(MYSQL* conn,char* filename,char* pwd,char* ownername)
                 strcpy(md5,row[5]);
                 if(!strcmp(row[3],"d"))
                 {
-                    return -1;
+                    return -3;
                 }
             }
             if(i==0)
@@ -194,6 +195,7 @@ int SendRM(MYSQL* conn,char* filename,char* pwd,char* ownername)
     memset(query,0,sizeof(query));
     strcpy(query,"select * from file where file_md5='");
     sprintf(query,"%s%s'",query,md5);
+    puts(query);
     i=mysql_query(conn,query);
     if(i)
     {
@@ -226,6 +228,7 @@ int SendRM(MYSQL* conn,char* filename,char* pwd,char* ownername)
         memset(query,0,sizeof(query));
         strcpy(query,"delete from file where file_belong_directory='");
         sprintf(query,"%s%s' and file_name='%s' and file_owner='%s'",query,pwd,filename,ownername);
+        puts(query);
         i=mysql_query(conn,query);
         if(i)
         {
@@ -472,6 +475,84 @@ CheckStart:
     }
     return 0;
 }
+
+int RemoveDIR(MYSQL* conn,char* dirname,char* pwd,char* ownername)
+{
+    pMyFile_t  pmyfile; 
+    char fnbuf[128] = {0};
+    MYSQL_RES* res;
+    MYSQL_ROW row;
+    int fnlen=strlen(dirname);
+    int filenum;
+    int i,ret;
+    char query[1024];
+    char directory[256]={0};
+    for(i = 0;i<fnlen-1;i++)
+    {
+        dirname[i]=dirname[i+1];
+    }
+    dirname[i]='\0';
+
+    sprintf(directory,"%s/%s",pwd,dirname);
+
+    memset(query,0,sizeof(query));
+    strcpy(query,"select * from file where file_owner='");
+    sprintf(query,"%s%s' and file_belong_directory regexp '%s'",query,ownername,directory);
+    puts(query);
+    ret = mysql_query(conn,query);
+    if(ret)
+    {
+        printf("记录到错误日志中去:%s\n",mysql_error(conn));
+    }
+    res = mysql_store_result(conn);
+    if(res)
+    {
+        filenum = mysql_num_rows(res);
+        pmyfile = (pMyFile_t) calloc (filenum,sizeof(MyFile_t));
+        i=0;
+        while((row = mysql_fetch_row(res))!=NULL)
+        {
+            strcpy(pmyfile[i].mfile_name,row[1]);
+            i++;
+        }
+        if(!i)
+        {
+            return -1;
+        }
+    }
+    printf("filenum:%d\n",filenum);
+    for(i = 0;i<filenum;i++)
+    {
+        sprintf(fnbuf,"%s%s","0",pmyfile[i].mfile_name);
+        puts(fnbuf);
+        ret = SendRM(conn,fnbuf,directory,ownername);
+        if(-3 == ret)
+        {
+            memset(query,0,sizeof(query));
+            strcpy(query,"delete from file where file_owner='");
+            sprintf(query,"%s%s' and file_belong_directory='%s' and file_name='%s'",query,ownername,directory,pmyfile[i].mfile_name);
+            puts(query);
+            ret = mysql_query(conn,query);
+            if(ret)
+            {
+                printf("记录到错误日志中去:%s\n",mysql_error(conn));
+            }
+
+        }
+
+    }
+    memset(query,0,sizeof(query));
+    strcpy(query,"delete from file where file_owner='");
+    sprintf(query,"%s%s' and file_belong_directory='%s' and file_name='%s'",query,ownername,pwd,dirname);
+    puts(query);
+    ret = mysql_query(conn,query);
+    if(ret)
+    {
+        printf("记录到错误日志中去:%s\n",mysql_error(conn));
+    }
+    return 0;
+}
+
 int ExecuteOparet(int sockfd,MYSQL* conn,char* pwd,char* ownername)
 {
     train oc;
@@ -544,6 +625,12 @@ int ExecuteOparet(int sockfd,MYSQL* conn,char* pwd,char* ownername)
             send(sockfd,&size,sizeof(int),0);
             send(sockfd,"Not Found Directory!",size,0);
         }
+        else if(-3 == ret)
+        {
+            int size =strlen("You can use 'rmdr' remove Directory!");
+            send(sockfd,&size,sizeof(int),0);
+            send(sockfd,"You can use 'rmdr' remove Directory",size,0);
+        }
         else
         {
             int size =sizeof("success");
@@ -580,6 +667,22 @@ int ExecuteOparet(int sockfd,MYSQL* conn,char* pwd,char* ownername)
         if(-2 == ret)
         {
             return -2;
+        }
+        break;
+        //RMDR_FLAG
+    case 7:
+        ret = RemoveDIR(conn,oc.buf,pwd,ownername);
+        if(0 == ret)
+        {
+            int size =sizeof("success");
+            send(sockfd,&size,sizeof(int),0);
+            send(sockfd,"success",size,0);
+        }
+        if(-1==ret)
+        {
+            int size =strlen("Not Found Directory!");
+            send(sockfd,&size,sizeof(int),0);
+            send(sockfd,"Not Found Directory!",size,0);
         }
         break;
     }

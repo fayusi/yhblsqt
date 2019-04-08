@@ -41,6 +41,11 @@ int SendGets(int sockfd,char* filename)
     t.buf[0] = '1';
     sprintf(t.buf,"%s%s",t.buf,filename);
     t.dataLen = strlen(t.buf);
+    if(t.dataLen < 2)
+    {
+        printf("Enter Some Character!\n");
+        return -1;
+    }
     int ret = SendCycle(sockfd,(char*)&t,4+t.dataLen);
     PUT_ERROR(-1,ret,"send(SendGets)");
     //recv md5sum
@@ -110,6 +115,11 @@ int SendPuts(int sockfd,char* filename)
 SendFileName:
     sprintf(t.buf,"%s%s",t.buf,RFname);
     t.dataLen = strlen(t.buf);
+    if(t.dataLen<2)
+    {
+        printf("Enter Some Character!\n");
+        return -1;
+    }
     int ret = SendCycle(sockfd,(char*)&t,4+t.dataLen);
     PUT_ERROR(-1,ret,"send(SendGets)");
     recv(sockfd,sendSig,5,0);
@@ -280,6 +290,11 @@ int SendRM(int sockfd,char* name)
     oc.buf[0] = '4';
     sprintf(oc.buf,"%s%s",oc.buf,name);
     oc.size = strlen(oc.buf);
+    if(oc.size < 2)
+    {
+        printf("Enter Some Character!\n");
+        return -1;
+    }
     int ret = SendCycle(sockfd,(char*)&oc,4+oc.size);
     PUT_ERROR(-1,ret,"send(SendRM)");
     return 0;
@@ -291,6 +306,11 @@ int EnterDir(int sockfd,char* name)
     oc.buf[0] = '5';
     sprintf(oc.buf,"%s%s",oc.buf,name);
     oc.dataLen = strlen(oc.buf);
+    if(oc.dataLen < 2)
+    {
+        printf("Enter Some Character!\n");
+        return -1;
+    }
     int ret = SendCycle(sockfd,(char*)&oc,4+oc.dataLen);
     PUT_ERROR(-1,ret,"send(SendED)");
     ret = strlen(oc.buf);
@@ -305,6 +325,11 @@ int MakeDIR(int sockfd,char* name)
     oc.buf[0] = '6';
     sprintf(oc.buf,"%s%s",oc.buf,name);
     oc.dataLen = strlen(oc.buf);
+    if(oc.dataLen < 2)
+    {
+        printf("Enter Some Character!\n");
+        return -1;
+    }
     int ret = SendCycle(sockfd,(char*)&oc,4+oc.dataLen);
     PUT_ERROR(-1,ret,"send(MKDIR)");
     while(1)
@@ -330,6 +355,7 @@ GetDIRName:
             else
             {
                 printf("Enter filename or routine error!\n");
+                printf("Enter new filename:\n");
                 goto GetDIRName;
             }
         }
@@ -338,6 +364,37 @@ GetDIRName:
         ret = SendCycle(sockfd,(char*)&oc,4+oc.dataLen);
         PUT_ERROR(-1,ret,"send(MKDIR)");
     }
+    return 0;
+}
+int RemoveDIR(int sockfd,char* name)
+{
+    train oc;
+    char dirname[64]={0};
+    memset(&oc,0,sizeof(train));
+    oc.buf[0] = '7';
+    sprintf(oc.buf,"%s%s",oc.buf,name);
+    oc.dataLen = strlen(oc.buf);
+    if(oc.dataLen < 2)
+    {
+        printf("Enter Some Character!\n");
+        return -1;
+    }
+    for(unsigned long i =0;i<strlen(dirname);i++)
+    {
+        if((dirname[i]>='a'&&dirname[i]<='z')||(dirname[i]>='A'&&dirname[i]<='Z')||
+           dirname[i]=='_'||dirname[i]=='.'||dirname[i]=='-'||
+           (dirname[i]>='0'&&dirname[i]<='9'))
+        {
+            continue;
+        }
+        else
+        {
+            printf("Enter filename or routine error!\n");
+            return -1;
+        }
+    }
+    int ret = SendCycle(sockfd,(char*)&oc,4+oc.dataLen);
+    PUT_ERROR(-1,ret,"send(MKDIR)");
     return 0;
 }
 
@@ -409,12 +466,20 @@ Start:
         }
         else if(!strcmp(srbuf,"rm "))
         {
-            SendRM(sockfd,oprbuf);
+            ret =  SendRM(sockfd,oprbuf);
+            if(-1 == ret)
+            {
+                goto operatend;
+            }
         }
         else if(!strcmp(srbuf,"cd "))
         {
             strcpy(pwdbackup,pwd);
-            EnterDir(sockfd,oprbuf);    
+            ret = EnterDir(sockfd,oprbuf);    
+            if(-1 == ret)
+            {
+                goto operatend;
+            }
         }
         else
         {
@@ -424,19 +489,30 @@ Start:
     }
     else
     {
-        puts(srbuf);
         if(!strcmp(cmdbuf,"cd "))
         {
             strcpy(pwdbackup,pwd);
-            EnterDir(sockfd,oprbuf);
+            ret = EnterDir(sockfd,oprbuf);
+            if(-1 == ret)
+            {
+                goto operatend;
+            }
         }
         else if(!strcmp(cmdbuf,"rm "))
         {
-            SendRM(sockfd,oprbuf);
+            ret = SendRM(sockfd,oprbuf);
+            if(-1 == ret)
+            {
+                goto operatend;
+            }
         }
         else if(!strcmp(srbuf,"gets "))
         {
-            SendGets(sockfd,oprbuf);
+            ret = SendGets(sockfd,oprbuf);
+            if(-1 == ret)
+            {
+                goto operatend;
+            }
         }
         else if(!strcmp(srbuf,"puts "))
         {
@@ -449,7 +525,20 @@ Start:
         else if(!strcmp(srbuf,"mkdr "))
         {
             puts("make dirctory");
-            MakeDIR(sockfd,oprbuf);
+            ret = MakeDIR(sockfd,oprbuf);
+            if(-1==retval)
+            {
+                goto operatend;
+            }
+        }
+        else if(!strcmp(srbuf,"rmdr "))
+        {
+            puts("remove dirctory");
+            ret = RemoveDIR(sockfd,oprbuf);
+            if(-1==retval)
+            {
+                goto operatend;
+            }
         }
         else
         {

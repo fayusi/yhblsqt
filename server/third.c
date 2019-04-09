@@ -541,6 +541,8 @@ int RemoveDIR(MYSQL* conn,char* dirname,char* pwd,char* ownername)
         }
 
     }
+    free(pmyfile);
+    pmyfile = NULL;
     memset(query,0,sizeof(query));
     strcpy(query,"delete from file where file_owner='");
     sprintf(query,"%s%s' and file_belong_directory='%s' and file_name='%s'",query,ownername,pwd,dirname);
